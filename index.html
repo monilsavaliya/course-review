@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HUL Course Reviews</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -11,15 +13,97 @@
             <h1>HUL Course Reviews</h1>
             <p>Student-driven insights for course selection</p>
         </header>
-        <div class="search-container">
-            <input type="text" class="search-input" placeholder="Search courses or professors...">
+        
+        <div class="search-sort-container">
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" class="search-input" placeholder="Search courses or professors...">
+            </div>
+            <div class="sort-container">
+                <select id="sort-by" class="sort-select">
+                    <option value="overall">Sort by: Overall Rating</option>
+                    <option value="grading">Sort by: Grading</option>
+                    <option value="workload">Sort by: Workload</option>
+                    <option value="attendance">Sort by: Attendance Policy</option>
+                </select>
+            </div>
         </div>
+        
         <div class="filter-buttons">
             <button class="filter-btn active" data-filter="all">All Courses</button>
             <!-- Filter buttons will be populated dynamically -->
         </div>
+        
         <div class="course-grid"></div>
+        
+        <div class="review-form-container">
+            <h2>Submit Your Review</h2>
+            <form id="review-form" class="review-form">
+                <div class="form-group">
+                    <label for="course-code">Course Code</label>
+                    <input type="text" id="course-code" required>
+                </div>
+                <div class="form-group">
+                    <label for="professor">Professor</label>
+                    <input type="text" id="professor" required>
+                </div>
+                <div class="form-group">
+                    <label>Workload (1-Very Tough, 5-Easy)</label>
+                    <div class="star-rating">
+                        <i class="far fa-star" data-rating="1"></i>
+                        <i class="far fa-star" data-rating="2"></i>
+                        <i class="far fa-star" data-rating="3"></i>
+                        <i class="far fa-star" data-rating="4"></i>
+                        <i class="far fa-star" data-rating="5"></i>
+                        <input type="hidden" id="workload-rating" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Grading</label>
+                    <div class="star-rating">
+                        <i class="far fa-star" data-rating="1"></i>
+                        <i class="far fa-star" data-rating="2"></i>
+                        <i class="far fa-star" data-rating="3"></i>
+                        <i class="far fa-star" data-rating="4"></i>
+                        <i class="far fa-star" data-rating="5"></i>
+                        <input type="hidden" id="grading-rating" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Attendance Policy (1-Very Strict, 5-Very Lenient)</label>
+                    <div class="star-rating">
+                        <i class="far fa-star" data-rating="1"></i>
+                        <i class="far fa-star" data-rating="2"></i>
+                        <i class="far fa-star" data-rating="3"></i>
+                        <i class="far fa-star" data-rating="4"></i>
+                        <i class="far fa-star" data-rating="5"></i>
+                        <input type="hidden" id="attendance-rating" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Overall Experience</label>
+                    <div class="star-rating">
+                        <i class="far fa-star" data-rating="1"></i>
+                        <i class="far fa-star" data-rating="2"></i>
+                        <i class="far fa-star" data-rating="3"></i>
+                        <i class="far fa-star" data-rating="4"></i>
+                        <i class="far fa-star" data-rating="5"></i>
+                        <input type="hidden" id="overall-rating" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="review-text">Your Review</label>
+                    <textarea id="review-text" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit Review</button>
+            </form>
+        </div>
     </div>
+    
+    <button id="dark-mode-toggle" class="dark-mode-toggle">
+        <i class="fas fa-moon"></i>
+    </button>
+    
     <script src="script.js"></script>
 </body>
 </html>

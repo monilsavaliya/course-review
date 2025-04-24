@@ -4,24 +4,355 @@
     --accent: #e74c3c;
     --light: #f8f9fa;
     --dark: #2c3e50;
+    --text: #333;
+    --bg: #ffffff;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; background-color: var(--light); color: var(--dark);}
-.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-.header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 2rem; text-align: center; border-radius: 0 0 20px 20px; margin-bottom: 2rem; }
-.search-container { position: relative; margin: 2rem 0; }
-.search-input { width: 100%; padding: 1rem 2rem; border: none; border-radius: 30px; font-size: 1.1rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);}
-.filter-buttons { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 2rem; }
-.filter-btn { padding: 0.5rem 1.5rem; border: none; border-radius: 20px; background: white; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);}
-.filter-btn.active { background: var(--secondary); color: white;}
-.course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem;}
-.course-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); transition: transform 0.3s ease;}
-.course-header { padding: 1.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center;}
-.course-content { padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;}
-.course-content.active { max-height: 1000px; padding: 1.5rem;}
-.metrics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0;}
-.metric-item { padding: 1rem; background: var(--light); border-radius: 10px; text-align: center;}
-.reviews-section { border-top: 1px solid #eee; padding-top: 1.5rem;}
-.review-card { background: var(--light); padding: 1rem; border-radius: 10px; margin: 1rem 0;}
-.rating { font-size: 1.6rem; font-weight: bold; }
-@media (max-width: 768px) { .container { padding: 1rem; } }
+
+[data-theme="dark"] {
+    --primary: #34495e;
+    --secondary: #2980b9;
+    --accent: #c0392b;
+    --light: #2d3436;
+    --dark: #ecf0f1;
+    --text: #ecf0f1;
+    --bg: #1e272e;
+    --card-bg: #2d3436;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: rgb(58, 232, 229);
+    color: var(--text);
+    padding-bottom: 2rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 0 0 20px 20px;
+    margin-bottom: 2rem;
+}
+
+.search-sort-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 2rem 0;
+    align-items: center;
+}
+
+.search-container {
+    position: relative;
+    flex: 1;
+    min-width: 250px;
+}
+
+.search-container i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--secondary);
+}
+
+.search-input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    box-shadow: var(--shadow);
+    background-color: var(--card-bg);
+    color: var(--text);
+}
+
+.sort-container {
+    min-width: 250px;
+}
+
+.sort-select {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    box-shadow: var(--shadow);
+    background-color: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.filter-btn {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 20px;
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+    font-weight: 500;
+}
+
+.filter-btn.active {
+    background: var(--secondary);
+    color: white;
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.course-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+}
+
+.course-header {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.course-header h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+}
+
+.course-header p {
+    opacity: 0.9;
+    font-size: 0.9rem;
+}
+
+.course-content {
+    padding: 0 1.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background-color: var(--card-bg);
+}
+
+.course-content.active {
+    max-height: 1000px;
+    padding: 1.5rem;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.metric-item {
+    padding: 1rem;
+    background: var(--light);
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.metric-item .rating {
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-weight: bold;
+}
+
+.reviews-section {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 1.5rem;
+}
+
+.reviews-section h4 {
+    margin-bottom: 1rem;
+    color: var(--secondary);
+}
+
+.review-card {
+    background: var(--light);
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+
+.review-card strong {
+    color: var(--secondary);
+}
+
+.rating {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: white;
+}
+
+.review-form-container {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    margin-top: 3rem;
+}
+
+.review-form-container h2 {
+    margin-bottom: 1.5rem;
+    color: var(--secondary);
+    text-align: center;
+}
+
+.review-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: var(--secondary);
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: var(--light);
+    color: var(--text);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.star-rating {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.star-rating i {
+    font-size: 1.5rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.star-rating i.active {
+    color: #f1c40f;
+}
+
+.submit-btn {
+    background: var(--secondary);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 1rem;
+}
+
+.submit-btn:hover {
+    background: var(--primary);
+}
+
+.dark-mode-toggle {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--secondary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .course-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .search-sort-container {
+        flex-direction: column;
+    }
+    
+    .search-container,
+    .sort-container {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .header {
+        padding: 1.5rem 1rem;
+    }
+    
+    .review-form-container {
+        padding: 1.5rem;
+    }
+}
