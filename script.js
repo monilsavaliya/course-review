@@ -69,6 +69,7 @@ function avg(arr) {
 function generateCourseCards(courses) {
   const grid = document.querySelector('.course-grid');
   grid.innerHTML = '';
+
   Object.values(courses).forEach(course => {
     const card = document.createElement('div');
     card.className = 'course-card';
@@ -88,7 +89,7 @@ function generateCourseCards(courses) {
           <h3>${course.code}</h3>
           <p>${course.professor}</p>
         </div>
-        <div class="rating">Avg: ${avg(course.overall)}</div>
+        <div class="rating">${avg(course.overall)}</div>
       </div>
       <div class="course-content">
         <div class="metrics-grid">
@@ -103,9 +104,17 @@ function generateCourseCards(courses) {
         </div>
       </div>
     `;
+
+    // Add toggle logic to expand/collapse
+    card.querySelector('.course-header').addEventListener('click', () => {
+      const content = card.querySelector('.course-content');
+      content.classList.toggle('active');
+    });
+
     grid.appendChild(card);
   });
 }
+
 
 function populateFilters(courses) {
     const filterContainer = document.querySelector('.filter-buttons');
